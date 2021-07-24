@@ -1,0 +1,62 @@
+https://caniuse.com/
+- Sirve para ver que API funciona en que navegador
+
+https://overreacted.io/
+blod de dan abramov creador de react
+
+Javascript vanila 
+Js sin librerias externas
+
+crear formulario con nombre, apellido, telefono, ciudad
+
+que es react
+Es una libreria compuesta de mas librerias para creas una app
+El virtual DOM es una copia del DOM creado por react para hacer mas rapida la carga de la aplicacion, evita la renderizacion completa del DOM y solo renderiza los cambios por medio de una reconciliación  
+
+https://github.com/nvm-sh/nvm
+Para intercambiar entre versiones de Node
+
+Para instalar create-react-app utilizamos Node
+- npm install -g create-react-app (lo instala en el computador de forma global)
+O podemos utilizar npx que es para correrlo instalandolo "temporalmente" en nuestro computador, especificando una carpeta/destino/nombre del proyecto
+Me dirijo a la ruta donde se creará la aplicación (carpeta padre) y ejecuto el siguiente comando:
+- npx create-react-app NOMBREPROYECTO
+
+
+#GIT
+git status #para ver el estado de los archivos
+git add . o git add src/app.js(ejemplo) #agrega todos los archivos modificados
+git commit -m(message) "firmar el cambio"
+git remote add origin  link.git
+git push origin -u master #master es la rama (-u es solo la primera vez)
+
+agregar las llaves ssh
+
+bit branch -a #para ver la rrama en la que estoy parado
+
+git checkout -b rama-para-poner-mi-nombre #para crear una rama
+
+git checkout master #para cambiar de rama
+
+git revert #hashtagdelcommit #para revertir los cambios
+
+git config --global user.email "amatiascastillo@gmail.com"
+git config --global user.name "MatyCastillo"
+
+git clone https://github.com/libgit2/libgit2 -b rama #Para clonar una rama en especifico
+
+
+Ecma: asociacion que regula Javascript
+
+const hibrido = {   # con los 3 puntos se traen todas las 
+  ...carro,             propiedades de carro y camion
+  ...camion
+}; 
+
+#Utilizacion del SpreadOperator
+function sum(...numbers){
+  return numbers.reduce((sum, num) => sum + num, 0);
+}
+console.log(sum(4, 3, 9, 10, 123, 98888, 0));
+
+<Fragment></Fragment> es lo mismo que poner <></> solo que fragment hay que importarlo
