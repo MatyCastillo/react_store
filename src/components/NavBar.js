@@ -1,36 +1,40 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ListadoCategorias from './Categorias';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import MenuButtons from "./Menu"
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    grow: {
+        flexGrow: 1
     },
     title: {
-        flexGrow: 1,
+        display: "none",
+        [theme.breakpoints.up("xs")]: {
+            display: "block"
+        }
+    },
+    root: {
+        backgroundColor: "#00695f"
     },
 }));
 
-export default function ButtonAppBar() {
+export default function NavBar(props) {
+    var titleBar = props.title
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static">
+        <div className={classes.grow}>
+            <AppBar position="static" className={classes.root} >
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        React Store
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        {titleBar}
                     </Typography>
-                    <ListadoCategorias />
+                    <div className={classes.grow} />
+                    <div className={classes.sectionMobile}>
+                        <MenuButtons /> {/*acá se llaman a los botones del menu*/}
+                    </div>
                 </Toolbar>
             </AppBar>
         </div>
