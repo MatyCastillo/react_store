@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(prop) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -105,7 +105,10 @@ export default function PrimarySearchAppBar() {
                     >
                         <ArrowDropDownIcon />
                     </IconButton>
+
                 </MenuItem>
+                <MenuItem>{prop.children}</MenuItem>
+
             </div>
             <div className={classes.sectionMobile}>
                 <IconButton
@@ -117,6 +120,7 @@ export default function PrimarySearchAppBar() {
                 >
                     <MoreIcon />
                 </IconButton>
+                <MenuItem>{prop.children}</MenuItem>
             </div>
             {renderMobileMenu}
             {renderMenu}
