@@ -1,6 +1,7 @@
 import NavBar from './components/NavBar';
 import MenuButtons from "./components/Menu"
 import CartWidget from './components/CartWidget';
+import ItemListContainer from './components/ItemListContainer';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <CartWidget />
         </MenuButtons>
       </NavBar>
-
+      <ItemListContainer greeting="Catalogo" />
     </>
   );
 }
