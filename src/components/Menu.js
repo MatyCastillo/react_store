@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -49,7 +50,7 @@ export default function PrimarySearchAppBar(prop) {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const menuId = "primary-search-account-menu";
+    const menuId = "menu";
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
@@ -65,7 +66,7 @@ export default function PrimarySearchAppBar(prop) {
         </Menu>
     );
 
-    const mobileMenuId = "primary-search-account-menu-mobile";
+    const mobileMenuId = "menu-mobile";
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
@@ -78,41 +79,37 @@ export default function PrimarySearchAppBar(prop) {
         >
 
             <MenuItem onClick={handleProfileMenuOpen}>
-                <p>Categorías</p>
                 <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
+                    aria-label="categorias"
+                    aria-controls="menu-categorias"
                     aria-haspopup="true"
                     color="inherit"
                 >
                     <ArrowDropDownIcon />
                 </IconButton>
+                <p>Categorías</p>
             </MenuItem>
         </Menu>
     );
 
     return (
-        <div className={classes.grow}>
+        <>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-                <MenuItem onClick={handleProfileMenuOpen}>
-                    <p>Categorías</p>
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        <ArrowDropDownIcon />
-                    </IconButton>
-
-                </MenuItem>
-                <MenuItem>{prop.children}</MenuItem>
-
+                <Button edge="end"
+                    aria-label="categorías de la tienda"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                    color="inherit"
+                >Categorías
+                    <ArrowDropDownIcon />
+                </Button>
             </div>
+            {prop.children}
             <div className={classes.sectionMobile}>
                 <IconButton
-                    aria-label="show more"
+                    aria-label="ver más"
                     aria-controls={mobileMenuId}
                     aria-haspopup="true"
                     onClick={handleMobileMenuOpen}
@@ -120,10 +117,10 @@ export default function PrimarySearchAppBar(prop) {
                 >
                     <MoreIcon />
                 </IconButton>
-                <MenuItem>{prop.children}</MenuItem>
+
             </div>
             {renderMobileMenu}
             {renderMenu}
-        </div>
+        </>
     );
 }

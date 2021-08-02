@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import MenuButtons from "./Menu"
-import CartWidget from './CartWidget';
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1
@@ -16,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     root: {
-        backgroundColor: "#00695f" //color del navbar
+        backgroundColor: "#00695f" //navbar color
     },
 }));
 
@@ -31,10 +29,7 @@ export default function NavBar(props) {
                     <Typography className={classes.title} variant="h6" noWrap>
                         {titleBar}
                     </Typography>
-                    <div className={classes.grow} />
-                    <div className={classes.sectionMobile}>
-                        {props.children} {/*acá se llaman a los botones del menu*/}
-                    </div>
+                    {props.children} {/*acá se llaman a los botones del menu*/}
                 </Toolbar>
             </AppBar>
         </div>
