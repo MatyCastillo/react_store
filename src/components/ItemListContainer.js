@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
+import ItemCount from './ItemCount'
 const useStyles = makeStyles((theme) => ({
     containerBg: {
         background: '#00695f',
@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme) => ({
 ));
 
 const ItemListContainer = (prop) => {
+
+    function onAdd(qty) {
+        alert("onAdd " + qty);
+    };
+
     const classes = useStyles();
     return (
         <div>
@@ -22,6 +27,7 @@ const ItemListContainer = (prop) => {
                 gutterBottom>
                 {prop.greeting}
             </Typography>
+            <ItemCount initial={2} stock={5} onAdd={onAdd} />
         </div>
     )
 }

@@ -2,6 +2,8 @@ import NavBar from './components/NavBar';
 import MenuButtons from "./components/Menu"
 import CartWidget from './components/CartWidget';
 import ItemListContainer from './components/ItemListContainer';
+import '@fontsource/roboto';
+
 
 function App() {
   return (
