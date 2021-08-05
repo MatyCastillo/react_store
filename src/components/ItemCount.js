@@ -59,7 +59,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         <Card className={classes.root}>
             <CardContent>
                 <Typography className={classes.pos} color="textSecondary">
-                    camisa
+                    Productc
                 </Typography>
                 < >
                     <ButtonGroup fullWidth className={classes.buttons} size="small" color="primary" aria-label="large outlined primary button group">
