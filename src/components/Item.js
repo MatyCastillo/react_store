@@ -1,21 +1,26 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        // maxWidth: 345, original width style
+        maxWidth: '100%',
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    cardActions: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    cardContent: {
+        display: 'flex',
+        justifyContent: 'space-between',
     },
 });
 
-export default function Item({ id, name, description, stock, image }) {
+export default function Item({ id, name, description, stock, img, price }) {
     const classes = useStyles();
 
     return (
@@ -27,19 +32,22 @@ export default function Item({ id, name, description, stock, image }) {
                             component="img"
                             alt="No Image"
                             height="140"
-                            image={require('../resources/img/no-image.png').default}
+                            image={img}
                             title="No Image"
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {name}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {description}
-                            </Typography>
+                            <div className={classes.cardContent}>
+                                <Typography gutterBottom variant="h5" >
+                                    {name}
+                                </Typography>
+                                <Typography gutterBottom variant="h5" >
+                                    $ {price}
+                                </Typography>
+                            </div>
+                            <Typography dangerouslySetInnerHTML={{ __html: description }} variant="body2" color="textSecondary" component="p" />
                         </CardContent>
                     </CardActionArea>
-                    <CardActions>
+                    <CardActions disableSpacing className={classes.cardActions}>
                         <Typography>Stock: {stock}</Typography>
                     </CardActions>
                 </Card>

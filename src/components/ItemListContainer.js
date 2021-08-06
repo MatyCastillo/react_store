@@ -38,7 +38,7 @@ const ItemListContainer = (prop) => {
                     <Typography className={classes.title}
                         variant="h5"
                         gutterBottom>
-                        Seleciona la Cantidad
+                        Selecciona la Cantidad
                     </Typography>
                     <ItemCount initial={2} stock={5} onAdd={onAdd} />
                 </Grid>
