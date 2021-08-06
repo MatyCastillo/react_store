@@ -11,55 +11,54 @@ export default function ItemList() {
     useEffect(() => {
         new Promise((resolve, reject) => {
             setLoading(true);
-            ///
             const data = [
                 {
                     id: "1",
-                    name: "Product-1",
+                    title: "Product-1",
                     description: "Lorem ipsum dolor sit.",
                     price: "112",
                     stock: 9,
-                    image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'
+                    pictureUrl: 'no-image.png'
                 },
                 {
                     id: "2",
-                    name: "Product-2",
+                    title: "Product-2",
                     description: "Lorem ipsum dolor sit.",
                     price: "15",
                     stock: 1,
-                    image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg',
+                    pictureUrl: 'no-image.png',
                 },
                 {
                     id: "3",
-                    name: "Product-3",
+                    title: "Product-3",
                     description: "Lorem ipsum dolor sit.",
                     price: "3",
                     stock: 2,
-                    image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg',
+                    pictureUrl: 'no-image.png',
                 },
                 {
                     id: "4",
-                    name: "Product-4",
+                    title: "Product-4",
                     description: "Lorem ipsum dolor sit.",
                     price: "7",
                     stock: 3,
-                    image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg',
+                    pictureUrl: 'no-image.png',
                 },
                 {
                     id: "5",
-                    name: "Product-5",
+                    title: "Product-5",
                     description: "Lorem ipsum dolor sit.",
                     price: "44",
                     stock: 1,
-                    image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg',
+                    pictureUrl: 'no-image.png',
                 },
                 {
                     id: "6",
-                    name: "Product-6",
+                    title: "Product-6",
                     description: "Lorem ipsum dolor sit.",
                     price: "9",
                     stock: 24,
-                    image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg',
+                    pictureUrl: 'no-image.png',
                 },
             ];
             setTimeout(() => resolve(data), 2000);
@@ -82,8 +81,8 @@ export default function ItemList() {
     return (
         <>
             <Grid container spacing={3}>
-                {products.map(({ name, description, stock, image, price }) =>
-                    (<Item name={name} description={description} stock={stock} img={image} price={price} />)
+                {products.map(({ title, description, stock, pictureUrl, price }) =>
+                    (<Item title={title} description={description} stock={stock} pictureUrl={pictureUrl} price={price} />)
                 )}
 
             </Grid>

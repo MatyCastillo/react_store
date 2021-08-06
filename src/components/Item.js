@@ -7,8 +7,7 @@ const useStyles = makeStyles({
         maxWidth: '100%',
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: '20rem'
     },
     cardActions: {
         display: 'flex',
@@ -20,8 +19,9 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Item({ id, name, description, stock, img, price }) {
+export default function Item({ id, title, description, stock, pictureUrl, price }) {
     const classes = useStyles();
+    const finalPictureUrl = '/resources/img/' + pictureUrl;
 
     return (
         <Grid item xs={12} sm={6} md={3} >
@@ -29,16 +29,17 @@ export default function Item({ id, name, description, stock, img, price }) {
                 <Card className={classes.root}>
                     <CardActionArea>
                         <CardMedia
+                            className={classes.media}
                             component="img"
                             alt="No Image"
                             height="140"
-                            image={img}
+                            image={finalPictureUrl}
                             title="No Image"
                         />
                         <CardContent>
                             <div className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" >
-                                    {name}
+                                    {title}
                                 </Typography>
                                 <Typography gutterBottom variant="h5" >
                                     $ {price}
