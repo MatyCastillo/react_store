@@ -7,16 +7,39 @@ const useStyles = makeStyles({
         maxWidth: '100%',
     },
     media: {
-        height: '20rem'
-    },
-    cardActions: {
-        display: 'flex',
-        justifyContent: 'flex-end',
+
+        height: '100%',
+        paddingTop: '0', // 16:9
     },
     cardContent: {
         display: 'flex',
         justifyContent: 'space-between',
+        flexDirection: 'column'
     },
+    cardTitle: {
+        fontWeight: '600',
+    },
+    descriptionBox: {
+        display: "-webkit-box",
+        boxOrient: "vertical",
+        lineClamp: 2,
+        wordBreak: "normal",
+        overflow: "hidden",
+        fontWeight: '500',
+        color: 'rgba(0,0,0,.6)'
+    },
+    cardActions: {
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
+    idText: {
+        float: 'left',
+        fontWeight: '500',
+        color: 'rgba(0,0,0,.3)'
+    },
+    stock: {
+        float: 'right'
+    }
 });
 
 export default function Item({ id, title, description, stock, pictureUrl, price }) {
@@ -24,8 +47,8 @@ export default function Item({ id, title, description, stock, pictureUrl, price 
     const finalPictureUrl = '/resources/img/' + pictureUrl;
 
     return (
-        <Grid item xs={12} sm={6} md={3} >
-            <Box boxShadow={3} item xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3} lg={2} >
+            <Box boxShadow={3} item xs={12} sm={6} md={2}>
                 <Card className={classes.root}>
                     <CardActionArea>
                         <CardMedia
@@ -38,18 +61,31 @@ export default function Item({ id, title, description, stock, pictureUrl, price 
                         />
                         <CardContent>
                             <div className={classes.cardContent}>
-                                <Typography gutterBottom variant="h5" >
+
+                                <Typography gutterBottom variant="h6" >
+                                    $ {Number(price).toLocaleString('es-AR')}
+                                </Typography>
+
+                                <Typography className={classes.cardTitle} noWrap gutterBottom variant="body2" >
                                     {title}
                                 </Typography>
-                                <Typography gutterBottom variant="h5" >
-                                    $ {price}
-                                </Typography>
+
                             </div>
-                            <Typography dangerouslySetInnerHTML={{ __html: description }} variant="body2" color="textSecondary" component="p" />
+                            <Box
+                                component="div"
+                                className={classes.descriptionBox}
+                                sx={{ typography: 'body2' }}
+                            >
+                                {description}
+                            </Box>
                         </CardContent>
                     </CardActionArea>
-                    <CardActions disableSpacing className={classes.cardActions}>
-                        <Typography>Stock: {stock}</Typography>
+                    <CardActions className={classes.cardActions}>
+
+                        <Typography className={classes.idText}>ID {id}</Typography>
+
+                        <Typography className={classes.stock}>Stock: {stock}</Typography>
+
                     </CardActions>
                 </Card>
             </Box>
