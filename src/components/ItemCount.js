@@ -32,9 +32,8 @@ const useStyles = makeStyles({
     },
     box: {
         justifyContent: 'center',
-        textAlign: 'center'
-
-    }
+        textAlign: 'center',
+    },
 });
 
 export default function ItemCount({ stock, initial, onAdd }) {
@@ -62,18 +61,33 @@ export default function ItemCount({ stock, initial, onAdd }) {
                     Product
                 </Typography>
                 < >
-                    <ButtonGroup fullWidth className={classes.buttons} size="small" color="primary" aria-label="large outlined primary button group">
-                        <Fab text="restar" onClick={() => substractOne()} ><RemoveIcon /></Fab>
+                    <ButtonGroup className={classes.buttons} size="small" aria-label="large outlined primary button group">
 
 
+
+                        <Button
+                            aria-label="reduce"
+                            color="secondary"
+                            onClick={() => {
+                                substractOne();
+                            }}
+                        >
+                            <RemoveIcon fontSize="small" />
+                        </Button>
                         <Paper className={classes.buttons}>
                             <Typography variant="button" >
                                 {count}
                             </Typography>
                         </Paper>
-
-
-                        <Fab text="sumar" onClick={() => addOne()}  ><AddIcon /></Fab>
+                        <Button
+                            aria-label="increase"
+                            color="primary"
+                            onClick={() => {
+                                addOne();
+                            }}
+                        >
+                            <AddIcon fontSize="small" />
+                        </Button>
                     </ButtonGroup>
                 </>
                 <br></br>

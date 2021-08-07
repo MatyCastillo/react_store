@@ -7,8 +7,10 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         alignItems: "center",
         display: 'flex',
-        color: "#00695f"
     },
+    circle: {
+        color: "#00695f"
+    }
 }));
 
 export default function CircularIndeterminate() {
@@ -16,7 +18,7 @@ export default function CircularIndeterminate() {
 
     return (
         <div className={classes.root}>
-            <CircularProgress />
+            <CircularProgress className={classes.circle} />
         </div>
     );
 }
