@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ItemCount from './ItemCount'
+import ItemCount from './ItemCount';
 import ItemList from './ItemList';
 import { Grid } from '@material-ui/core';
 
@@ -33,14 +33,6 @@ const ItemListContainer = (prop) => {
                         {prop.greeting}
                     </Typography>
                     <ItemList />
-                </Grid>
-                <Grid item xs={3}>
-                    <Typography className={classes.title}
-                        variant="h5"
-                        gutterBottom>
-                        Selecciona la Cantidad
-                    </Typography>
-                    <ItemCount initial={2} stock={5} onAdd={onAdd} />
                 </Grid>
             </Grid>
         </div>

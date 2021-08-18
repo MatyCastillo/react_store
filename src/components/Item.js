@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
+import ItemCount from './ItemCount';
 
 const useStyles = makeStyles({
     root: {
@@ -7,7 +8,6 @@ const useStyles = makeStyles({
         maxWidth: '100%',
     },
     media: {
-
         height: '100%',
         paddingTop: '0', // 16:9
     },
@@ -26,11 +26,7 @@ const useStyles = makeStyles({
         wordBreak: "normal",
         overflow: "hidden",
         fontWeight: '500',
-        color: 'rgba(0,0,0,.6)'
-    },
-    cardActions: {
-        display: 'flex',
-        justifyContent: 'space-between'
+        color: '#007185'
     },
     idText: {
         float: 'left',
@@ -39,8 +35,24 @@ const useStyles = makeStyles({
     },
     stock: {
         float: 'right'
+    },
+    price: {
+        color: '#B82704'
+    },
+    idText: {
+        float: 'right',
+        fontWeight: '500',
+        color: 'rgba(0,0,0,.3)'
+    },
+    divConteiner: {
+        justifyContent: 'center',
+        textAlign: 'center',
     }
 });
+
+function onAdd(qty) {
+    alert("onAdd " + qty);
+};
 
 export default function Item({ id, title, description, stock, pictureUrl, price }) {
     const classes = useStyles();
@@ -63,11 +75,8 @@ export default function Item({ id, title, description, stock, pictureUrl, price 
                             <div className={classes.cardContent}>
 
                                 <Typography gutterBottom variant="h6" >
-                                    $ {Number(price).toLocaleString('es-AR')}
-                                </Typography>
-
-                                <Typography className={classes.cardTitle} noWrap gutterBottom variant="body2" >
                                     {title}
+                                    <Typography className={classes.idText}>id:{id}</Typography>
                                 </Typography>
 
                             </div>
@@ -78,15 +87,12 @@ export default function Item({ id, title, description, stock, pictureUrl, price 
                             >
                                 {description}
                             </Box>
+                            <Typography className={classes.price} variant="h5" >
+                                $ {Number(price).toLocaleString('es-AR')}
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <CardActions className={classes.cardActions}>
-
-                        <Typography className={classes.idText}>ID {id}</Typography>
-
-                        <Typography className={classes.stock}>Stock: {stock}</Typography>
-
-                    </CardActions>
+                    <ItemCount initial={2} stock={5} onAdd={onAdd} />
                 </Card>
             </Box>
         </Grid >
