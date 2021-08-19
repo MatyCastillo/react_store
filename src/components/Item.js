@@ -54,7 +54,7 @@ function onAdd(qty) {
     alert("onAdd " + qty);
 };
 
-export default function Item({ id, title, description, stock, pictureUrl, price }) {
+export default function Item({ id, title, description, pictureUrl, price }) {
     const classes = useStyles();
     const finalPictureUrl = '/resources/img/' + pictureUrl;
 

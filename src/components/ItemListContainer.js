@@ -25,8 +25,8 @@ const ItemListContainer = (prop) => {
     const classes = useStyles();
     return (
         <div>
-            <Grid container spacing={3}>
-                <Grid item xs={9}>
+            <Grid container>
+                <Grid item >
                     <Typography className={classes.title}
                         variant="h5"
                         gutterBottom>

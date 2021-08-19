@@ -22,11 +22,13 @@ const useStyles = makeStyles({
 });
 
 export default function ItemCount({ stock, initial, onAdd }) {
+    const stockNum = parseInt(stock);
+    const initialNum = parseInt(initial);
     const classes = useStyles();
     const [count, setCount] = useState(initial);
 
     const addOne = () => {
-        if (count < stock) { setCount(count + 1) };
+        if (count < stockNum) { setCount(count + 1) };
     }
 
     const substractOne = () => {
@@ -34,14 +36,13 @@ export default function ItemCount({ stock, initial, onAdd }) {
     }
 
     const addToCart = () => {
-        if (initial <= stock) {
+        if (initial <= stockNum) {
             onAdd(count);
         }
     }
 
     return (
         <CardContent>
-
             <ButtonGroup className={classes.buttons}>
 
                 <Button
@@ -70,7 +71,6 @@ export default function ItemCount({ stock, initial, onAdd }) {
             <Button style={{ marginTop: '8px' }} fullWidth variant="outlined" onClick={() => addToCart()}>
                 Agregar al Carrito
             </Button>
-
         </CardContent>
     );
 }
