@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Box, Typography, Grid, CardMedia } from "@material-ui/core";
+import { makeStyles, Box, Typography, Grid, CardMedia , Divider} from "@material-ui/core";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -46,6 +46,7 @@ function onAdd(qty) {
 export default function ItemDetail(props) {
     const classes = useStyles();
     const item = props.item;
+    const finalPictureUrl = '/resources/img/' + item.pictureUrl;
 
     return (
         <Grid container spacing={3} className={classes.root}>
@@ -53,23 +54,26 @@ export default function ItemDetail(props) {
 
                 <CardMedia
                     className={classes.media}
-                    image={item.pictureUrl}
+                    image={finalPictureUrl}
                     title="Imagen del producto"
                 />
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
                 <div className={classes.content}>
-
+                    
                     <Typography gutterBottom variant="h6" >
                         {item.title}
                         <Typography className={classes.idText}>ID {item.id}</Typography>
                     </Typography>
-
+                    <Divider />
                     <Typography className={classes.idText}>Precio:</Typography>
                     <Typography className={classes.price} noWrap gutterBottom variant="h5">
                         $ {Number(item.price).toLocaleString('es-AR')}
                     </Typography>
-
+                    <Divider />
+                    <Typography className={classes.idText}>Categoria:</Typography>
+                    <Typography variant="subtitle1" gutterBottom>{item.category}</Typography>
+                    <Divider />
                     <Box
                         component="div"
                         className={classes.description}>
@@ -77,7 +81,7 @@ export default function ItemDetail(props) {
                         <Typography className={classes.description} gutterBottom variant="h6">
                             {item.description}
                         </Typography>
-
+                        <Divider />
                     </Box>
                     <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
 

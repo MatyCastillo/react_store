@@ -6,8 +6,10 @@ import ItemList from './ItemList';
 import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    containerBg: {
-        background: '#00695f',
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        
     },
     title: {
         paddingTop: "20px",
@@ -25,7 +27,7 @@ const ItemListContainer = (prop) => {
     const classes = useStyles();
     return (
         <div>
-            <Grid container>
+            <Grid container className={classes.container}>
                 <Grid item >
                     <Typography className={classes.title}
                         variant="h5"

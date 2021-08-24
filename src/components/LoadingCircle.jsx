@@ -4,9 +4,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexDirection: "column",
-        alignItems: "center",
+        paddingTop: '40px',
         display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     circle: {
         color: "#00695f"

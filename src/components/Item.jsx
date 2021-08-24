@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
 import ItemCount from './ItemCount';
 
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
         fontWeight: '600',
     },
     descriptionBox: {
+        "fontFamily": `"Roboto", "Helvetica", "Arial", sans-serif`,
         display: "-webkit-box",
         boxOrient: "vertical",
         lineClamp: 2,
@@ -62,7 +64,7 @@ export default function Item({ id, title, description, pictureUrl, price }) {
         <Grid item xs={12} sm={6} md={3} lg={2} >
             <Box boxShadow={3} item xs={12} sm={6} md={2}>
                 <Card className={classes.root}>
-                    <CardActionArea>
+                    <Link to={`/item/${id}`} component={CardActionArea}>
                         <CardMedia
                             className={classes.media}
                             component="img"
@@ -91,7 +93,7 @@ export default function Item({ id, title, description, pictureUrl, price }) {
                                 $ {Number(price).toLocaleString('es-AR')}
                             </Typography>
                         </CardContent>
-                    </CardActionArea>
+                    </Link>
                     <ItemCount initial={2} stock={5} onAdd={onAdd} />
                 </Card>
             </Box>
