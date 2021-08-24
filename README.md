@@ -1,6 +1,6 @@
 # Proyecto E-commerce en ReactJs 
 
-Para CODERHOUSE.
+Para CODERHOUSE
 
 ## Dependencias extras
 
