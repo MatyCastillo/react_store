@@ -1,7 +1,7 @@
 import { useParams, useLocation } from "react-router";
 import { Grid } from "@material-ui/core";
 import Item from "./Item";
-import LoadingCircle from "./LoadingCircle";
+import LoadingCircle from "./LoadingLinear";
 import { mockData } from "../MockData";
 
 const { useEffect, useState } = require("react");
@@ -10,13 +10,11 @@ export default function ItemList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
-  const [cat, setCat] = useState("");
   const location = useLocation();
 
   useEffect(() => {
     new Promise((resolve, reject) => {
       setLoading(true);
-      setCat(categoryId);
       if (categoryId == null) {
         setTimeout(() => resolve(mockData), 2000);
       } else {
