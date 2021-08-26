@@ -45,12 +45,6 @@ export default function ItemCount({ stock, initial, onAdd }) {
     }
   };
 
-  const addToCart = () => {
-    if (initial <= stockNum) {
-      onAdd(count);
-    }
-  };
-
   return (
     <CardContent>
       <ButtonGroup className={classes.buttons}>
@@ -79,7 +73,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         style={{ marginTop: "8px" }}
         fullWidth
         variant="outlined"
-        onClick={() => addToCart()}
+        onClick={() => onAdd}
       >
         Agregar al Carrito
       </Button>

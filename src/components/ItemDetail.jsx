@@ -1,7 +1,9 @@
 import React from "react";
+import { useState } from "react";
 import {
   makeStyles,
   Box,
+  Button,
   Typography,
   Grid,
   CardMedia,
@@ -42,14 +44,15 @@ const useStyles = makeStyles({
   },
 });
 
-function onAdd(qty) {
-  alert("onAdd " + qty);
-}
-
 export default function ItemDetail(props) {
   const classes = useStyles();
   const item = props.item;
   const finalPictureUrl = "/resources/img/" + item.pictureUrl;
+  const [quantity, setQuantity] = useState(0);
+
+  const agregar = (item) => {
+    console.log("item", item);
+  };
 
   return (
     <Grid container spacing={3} className={classes.root}>
@@ -95,7 +98,14 @@ export default function ItemDetail(props) {
             </Typography>
             <Divider />
           </Box>
-          <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
+          <ItemCount mt={3} initial={1} stock={item.stock} onAdd={agregar} />
+          <Button
+            style={{ marginTop: "8px", display: "none" }}
+            fullWidth
+            variant="outlined"
+          >
+            Terminar Compra
+          </Button>
         </div>
       </Grid>
     </Grid>

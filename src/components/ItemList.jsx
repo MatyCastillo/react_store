@@ -4,6 +4,9 @@ import Item from "./Item";
 import LoadingCircle from "./LoadingLinear";
 import { mockData } from "../MockData";
 
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
 const { useEffect, useState } = require("react");
 
 export default function ItemList() {
@@ -11,6 +14,9 @@ export default function ItemList() {
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
   const location = useLocation();
+
+  const cartContext = useContext(CartContext);
+  console.log("isDark", cartContext);
 
   useEffect(() => {
     new Promise((resolve, reject) => {

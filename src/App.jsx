@@ -10,26 +10,30 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Category from "./pages/Category";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <NavBar title="React Store">
-        <MenuButtons>
-          <CartWidget />
-        </MenuButtons>
-      </NavBar>
+import { useState } from "react";
+import { CartContext } from "./context/CartContext";
 
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/item/:id">
-          <Detail />
-        </Route>
-        <Route exact path="/category/:categoryId" component={Category} />
-      </Switch>
-    </BrowserRouter>
+export default function App() {
+  const [cartContext, setcartContext] = useState(false);
+  return (
+    <CartContext.Provider value={cartContext}>
+      <BrowserRouter>
+        <NavBar title="React Store">
+          <MenuButtons>
+            <CartWidget />
+          </MenuButtons>
+        </NavBar>
+
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/item/:id">
+            <Detail />
+          </Route>
+          <Route exact path="/category/:categoryId" component={Category} />
+        </Switch>
+      </BrowserRouter>
+    </CartContext.Provider>
   );
 }
-
-export default App;
