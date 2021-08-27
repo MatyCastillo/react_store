@@ -73,7 +73,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         style={{ marginTop: "8px" }}
         fullWidth
         variant="outlined"
-        onClick={() => onAdd}
+        onClick={() => onAdd(count)}
       >
         Agregar al Carrito
       </Button>
