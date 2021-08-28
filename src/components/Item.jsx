@@ -96,7 +96,6 @@ export default function Item({ id, title, description, pictureUrl, price }) {
               </Typography>
             </CardContent>
           </Link>
-          <ItemCount initial={2} stock={5} onAdd={onAdd} />
         </Card>
       </Box>
     </Grid>

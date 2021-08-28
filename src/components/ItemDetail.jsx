@@ -1,7 +1,10 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   makeStyles,
   Box,
+  Button,
   Typography,
   Grid,
   CardMedia,
@@ -42,15 +45,24 @@ const useStyles = makeStyles({
   },
 });
 
-function onAdd(qty) {
-  alert("onAdd " + qty);
-}
-
 export default function ItemDetail(props) {
   const classes = useStyles();
   const item = props.item;
   const finalPictureUrl = "/resources/img/" + item.pictureUrl;
 
+  const [quantity, setQuantity] = useState(0);
+  const [finish, setFinish] = useState(false);
+
+  useEffect(() => {
+    quantity > 0 ? setFinish(true) : setFinish(false);
+  }, [quantity]);
+
+  const onAdd = (quant) => {
+    if (quant <= item.stock) {
+      setQuantity(quant);
+    }
+  };
+  console.log("quantity", quantity);
   return (
     <Grid container spacing={3} className={classes.root}>
       <Grid item lg={8} md={8} xs={12}>
@@ -95,7 +107,20 @@ export default function ItemDetail(props) {
             </Typography>
             <Divider />
           </Box>
-          <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
+          {!finish && (
+            <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
+          )}
+          {finish && (
+            <Button
+              to={"/cart"}
+              component={Link}
+              style={{ marginTop: "8px" }}
+              fullWidth
+              variant="outlined"
+            >
+              Terminar Compra
+            </Button>
+          )}
         </div>
       </Grid>
     </Grid>
