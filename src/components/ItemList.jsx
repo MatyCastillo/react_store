@@ -1,7 +1,8 @@
 import { useParams, useLocation } from "react-router";
-import { Grid } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import Item from "./Item";
 import LoadingCircle from "./LoadingLinear";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { mockData } from "../MockData";
 
 import { useContext } from "react";
@@ -40,7 +41,13 @@ export default function ItemList() {
       });
   }, [location.pathname]);
   if (loading) {
-    return <LoadingCircle />;
+    <Grid container spacing={3}>
+      <Grid item xs={12} sm={6} md={3} lg={2}>
+        <Box boxShadow={3} item xs={12} sm={6} md={2}>
+          <Skeleton variant="rect" height={350} />
+        </Box>
+      </Grid>
+    </Grid>;
   }
 
   return (
