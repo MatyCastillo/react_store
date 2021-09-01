@@ -11,12 +11,11 @@ import Detail from "./pages/Detail";
 import Category from "./pages/Category";
 
 import { useState } from "react";
-import { CartContext } from "./context/CartContext";
+import { CartContextProvider } from "./context/CartContext";
 
 export default function App() {
-  const [cartContext, setcartContext] = useState(false);
   return (
-    <CartContext.Provider value={cartContext}>
+    <CartContextProvider>
       <BrowserRouter>
         <NavBar title="React Store">
           <MenuButtons>
@@ -34,6 +33,6 @@ export default function App() {
           <Route exact path="/category/:categoryId" component={Category} />
         </Switch>
       </BrowserRouter>
-    </CartContext.Provider>
+    </CartContextProvider>
   );
 }

@@ -10,12 +10,13 @@ import {
   Box,
   makeStyles,
 } from "@material-ui/core";
-import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
   root: {
     // maxWidth: 345, original width style
     maxWidth: "100%",
+    transition: "transform 0.15s ease-in-out",
+    "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
   },
   media: {
     height: "100%",
@@ -65,7 +66,7 @@ export default function Item({ id, title, description, pictureUrl, price }) {
   const finalPictureUrl = "/resources/img/" + pictureUrl;
 
   return (
-    <Grid item xs={12} sm={6} md={3} lg={2}>
+    <Grid item xs={12} sm={6} lg={2}>
       <Box boxShadow={3} item xs={12} sm={6} md={2}>
         <Card className={classes.root}>
           <Link to={`/item/${id}`} component={CardActionArea}>
