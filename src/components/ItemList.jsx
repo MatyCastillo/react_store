@@ -1,11 +1,9 @@
 import { useParams, useLocation } from "react-router";
-import { Grid } from "@material-ui/core";
+import { Grid, Box, Typography } from "@material-ui/core";
 import Item from "./Item";
 import LoadingCircle from "./LoadingLinear";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { mockData } from "../MockData";
-
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
 
 const { useEffect, useState } = require("react");
 
@@ -14,9 +12,6 @@ export default function ItemList() {
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
   const location = useLocation();
-
-  const cartContext = useContext(CartContext);
-  console.log("isDark", cartContext);
 
   useEffect(() => {
     new Promise((resolve, reject) => {
@@ -40,26 +35,55 @@ export default function ItemList() {
       });
   }, [location.pathname]);
   if (loading) {
-    return <LoadingCircle />;
-  }
-
-  return (
-    <>
+    return (
       <Grid container spacing={3}>
-        {products.map(
-          ({ title, description, stock, pictureUrl, price, id, category }) => (
-            <Item
-              title={title}
-              description={description}
-              stock={stock}
-              pictureUrl={pictureUrl}
-              price={price}
-              id={id}
-              category={category}
-            />
-          )
-        )}
+        {new Array(12).fill(1).map((item) => (
+          <Grid item xs={12} sm={6} md={3} lg={2}>
+            <Box boxShadow={3} item xs={12} sm={6} md={2}>
+              <Skeleton animation="wave" variant="rect" height={215} />
+              <Box height={120} margin={1}>
+                <Skeleton width="50%">
+                  <Typography>.</Typography>
+                </Skeleton>
+                <Skeleton width="80%">
+                  <Typography variant="h3">.</Typography>
+                </Skeleton>
+                <Skeleton width="15%">
+                  <Typography variant="h4">.</Typography>
+                </Skeleton>
+              </Box>
+            </Box>
+          </Grid>
+        ))}
       </Grid>
-    </>
-  );
+    );
+  } else {
+    return (
+      <>
+        <Grid container spacing={3}>
+          {products.map(
+            ({
+              title,
+              description,
+              stock,
+              pictureUrl,
+              price,
+              id,
+              category,
+            }) => (
+              <Item
+                title={title}
+                description={description}
+                stock={stock}
+                pictureUrl={pictureUrl}
+                price={price}
+                id={id}
+                category={category}
+              />
+            )
+          )}
+        </Grid>
+      </>
+    );
+  }
 }

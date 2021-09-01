@@ -1,9 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import CartContext from "../context/CartContext";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
   Box,
+  Paper,
   Button,
   Typography,
   Grid,
@@ -16,6 +19,7 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 1200,
     display: "flex",
+    padding: "30px",
   },
   media: {
     height: "0",
@@ -49,7 +53,8 @@ export default function ItemDetail(props) {
   const classes = useStyles();
   const item = props.item;
   const finalPictureUrl = "/resources/img/" + item.pictureUrl;
-
+  const { products, setProducts, cart, setCart, addItem } =
+    useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
   const [finish, setFinish] = useState(false);
 
@@ -62,67 +67,76 @@ export default function ItemDetail(props) {
       setQuantity(quant);
     }
   };
-  console.log("quantity", quantity);
   return (
-    <Grid container spacing={3} className={classes.root}>
-      <Grid item lg={8} md={8} xs={12}>
-        <CardMedia
-          className={classes.media}
-          image={finalPictureUrl}
-          title="Imagen del producto"
-        />
-      </Grid>
-      <Grid item lg={4} md={4} xs={12}>
-        <div className={classes.content}>
-          <Typography gutterBottom variant="h6">
-            {item.title}
-            <Typography className={classes.idText}>ID {item.id}</Typography>
-          </Typography>
-          <Divider />
-          <Typography className={classes.idText}>Precio:</Typography>
-          <Typography
-            className={classes.price}
-            noWrap
-            gutterBottom
-            variant="h5"
-          >
-            $ {Number(item.price).toLocaleString("es-AR")}
-          </Typography>
-          <Divider />
-          <Typography className={classes.idText}>Categoria:</Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            {item.category}
-          </Typography>
-          <Divider />
-          <Box component="div" className={classes.description}>
-            <Typography className={classes.idText}>
-              Sobre este artículo:
-            </Typography>
-            <Typography
-              className={classes.description}
-              gutterBottom
-              variant="h6"
-            >
-              {item.description}
+    <Paper variant="outlined">
+      <Grid container spacing={3} className={classes.root}>
+        <Grid item lg={8} md={8} xs={12}>
+          <CardMedia
+            className={classes.media}
+            image={finalPictureUrl}
+            title="Imagen del producto"
+          />
+        </Grid>
+        <Grid item lg={4} md={4} xs={12}>
+          <div className={classes.content}>
+            <Typography gutterBottom variant="h6">
+              {item.title}
+              <Typography className={classes.idText}>ID {item.id}</Typography>
             </Typography>
             <Divider />
-          </Box>
-          {!finish && (
-            <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
-          )}
-          {finish && (
-            <Button
-              to={"/cart"}
-              component={Link}
-              style={{ marginTop: "8px" }}
-              fullWidth
-              variant="outlined"
+            <Typography className={classes.idText}>Precio:</Typography>
+            <Typography
+              className={classes.price}
+              noWrap
+              gutterBottom
+              variant="h5"
             >
-              Terminar Compra
-            </Button>
-          )}
-        </div>
+              $ {Number(item.price).toLocaleString("es-AR")}
+            </Typography>
+            <Divider />
+            <Typography className={classes.idText}>Categoria:</Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              {item.category}
+            </Typography>
+            <Divider />
+            <Box component="div" className={classes.description}>
+              <Typography className={classes.idText}>
+                Sobre este artículo:
+              </Typography>
+              <Typography
+                className={classes.description}
+                gutterBottom
+                variant="h6"
+              >
+                {item.description}
+              </Typography>
+              <Divider />
+            </Box>
+            {!finish && (
+              <ItemCount
+                mt={3}
+                initial={1}
+                stock={item.stock}
+                onAdd={onAdd}
+                onClick={() => {
+                  console.log("hola");
+                }}
+              />
+            )}
+            {finish && (
+              <Button
+                to={"/cart"}
+                component={Link}
+                style={{ marginTop: "8px" }}
+                fullWidth
+                variant="outlined"
+              >
+                Terminar Compra
+              </Button>
+            )}
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </Paper>
   );
 }
