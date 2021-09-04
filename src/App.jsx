@@ -11,7 +11,7 @@ import Detail from "./pages/Detail";
 import Category from "./pages/Category";
 
 import { useState } from "react";
-import { CartContextProvider } from "./context/CartContext";
+import CartContextProvider from "./context/cartContext";
 
 export default function App() {
   return (

@@ -69,7 +69,7 @@ export default function Item({ id, title, description, pictureUrl, price }) {
     <Grid item xs={12} sm={6} lg={2}>
       <Box boxShadow={3} item xs={12} sm={6} md={2}>
         <Card className={classes.root}>
-          <Link to={`/item/${id}`} component={CardActionArea}>
+          <CardActionArea to={`/item/${id}`} component={Link}>
             <CardMedia
               className={classes.media}
               component="img"
@@ -96,7 +96,7 @@ export default function Item({ id, title, description, pictureUrl, price }) {
                 $ {Number(price).toLocaleString("es-AR")}
               </Typography>
             </CardContent>
-          </Link>
+          </CardActionArea>
         </Card>
       </Box>
     </Grid>

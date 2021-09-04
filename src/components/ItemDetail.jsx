@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import CartContext from "../context/CartContext";
+import { CartContext } from "../context/cartContext";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
@@ -53,8 +53,7 @@ export default function ItemDetail(props) {
   const classes = useStyles();
   const item = props.item;
   const finalPictureUrl = "/resources/img/" + item.pictureUrl;
-  const { products, setProducts, cart, setCart, addItem } =
-    useContext(CartContext);
+  const { cart, addItem } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
   const [finish, setFinish] = useState(false);
 
@@ -65,8 +64,10 @@ export default function ItemDetail(props) {
   const onAdd = (quant) => {
     if (quant <= item.stock) {
       setQuantity(quant);
+      addItem(item, quant);
     }
   };
+  console.log("CART ITEMS", cart);
   return (
     <Paper variant="outlined">
       <Grid container spacing={3} className={classes.root}>
@@ -113,15 +114,7 @@ export default function ItemDetail(props) {
               <Divider />
             </Box>
             {!finish && (
-              <ItemCount
-                mt={3}
-                initial={1}
-                stock={item.stock}
-                onAdd={onAdd}
-                onClick={() => {
-                  console.log("hola");
-                }}
-              />
+              <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
             )}
             {finish && (
               <Button
