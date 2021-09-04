@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Proyecto E-commerce en ReactJs 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Para CODERHOUSE
 
-## Available Scripts
+## Dependencias extras
 
-In the project directory, you can run:
+El proyecto se encuentra desallorado con las siguiente dependecias que no se dieron en el curso:
 
-### `yarn start`
+### `Yarn`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `MaterialUI`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Acerca del Proyecto
 
-### `yarn test`
+En el siguiente proyecto se implementó el inicio de un e-commerce. 
+Por el momento está desarrollado el NavBar, compuesto por el logo y nombre de la tienda, que al hacer click en algunos de ellos el usuario es redirigido a la pantalla inicial, un listado de categorías, en el que se encuentran las categorías y muestran los artículos pertinentes al clickear sobre alguna categoría, y un carrito de compras, el cual no se encuentra implementado aún. Esta navbar se mantiene en todas las secciones. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La pantalla inicial(home) es un catálogo en el cual se disponen todos los artículos disponibles en la tienda, cada producto es una Card en la cual se muestra el título, el id, el precio, una descripción corta del producto y un contador de productos que permite seleccionar la cantidad de artículos para luego agregarlos al carrito con el botón que se encuentra debajo del mismo.
 
-### `yarn build`
+Al hacer click en un producto se ingresa a los detalles del producto, donde se puede encontrar una vista más detallada del producto que incluye además del título, el id y el precio, la categoría a la cual corresponde y la descripción completa. Del mismo modo que la card, se puede seleccionar la cantidad y agregarlo al carrito.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Enfoque y Decisiones
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Opté por un enfoque orientado a una base de e-commerce el cual se puede adaptar a cualquier uso, me pareció bueno que al finalizar el proyecto obtenga un template que pueda ser usado en cualquier ámbito.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Decidí utilizar MaterialUI porque es una librería que está pensada para react, además que su diseño es el nativo de android que esta tan afirmado en los usuarios finales.
