@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useContext } from "react";
-import { CartContext } from "../context/cartContext";
+
+import { useState, useEffect, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import {
   makeStyles,
@@ -13,6 +13,7 @@ import {
   CardMedia,
   Divider,
 } from "@material-ui/core";
+import { CartContext } from "../context/cartContext";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -41,6 +42,7 @@ const useStyles = makeStyles({
     overflow: "hidden",
     fontWeight: "500",
     color: "#007185",
+    fontSize: "100%",
   },
   idText: {
     float: "right",
@@ -67,7 +69,6 @@ export default function ItemDetail(props) {
       addItem(item, quant);
     }
   };
-  console.log("CART ITEMS", cart);
   return (
     <Paper variant="outlined">
       <Grid container spacing={3} className={classes.root}>
@@ -112,21 +113,29 @@ export default function ItemDetail(props) {
                 {item.description}
               </Typography>
               <Divider />
+
+
+              {!finish && (
+                <ItemCount
+                  mt={3}
+                  initial={1}
+                  stock={item.stock}
+                  onAdd={onAdd}
+                />
+              )}
+              {finish && (
+                <Button
+                  to={"/cart"}
+                  component={Link}
+                  style={{ marginTop: "8px" }}
+                  fullWidth
+                  variant="outlined"
+                >
+                  Terminar Compra
+                </Button>
+              )}
             </Box>
-            {!finish && (
-              <ItemCount mt={3} initial={1} stock={item.stock} onAdd={onAdd} />
-            )}
-            {finish && (
-              <Button
-                to={"/cart"}
-                component={Link}
-                style={{ marginTop: "8px" }}
-                fullWidth
-                variant="outlined"
-              >
-                Terminar Compra
-              </Button>
-            )}
+
           </div>
         </Grid>
       </Grid>
