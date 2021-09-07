@@ -11,7 +11,7 @@ import {
   CardMedia,
   Divider,
 } from "@material-ui/core";
-import { CartContext } from "../context/cartContext";
+import { CartContext } from "../context/CartContext";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
