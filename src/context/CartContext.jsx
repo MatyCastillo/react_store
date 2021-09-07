@@ -4,7 +4,6 @@ export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  console.log("cart:", cart);
 
   const addItem = (newItem, quant) => {
     const cartAux = [...cart];
@@ -16,7 +15,6 @@ const CartContextProvider = ({ children }) => {
       cartAux.push({ item: newItem, quantity: quant });
       setCart(cartAux);
     }
-    console.log("cart:", cart);
   };
 
   const isInCart = (id) => {
@@ -39,9 +37,33 @@ const CartContextProvider = ({ children }) => {
     setCart([]);
   };
 
+  const getCartAmount = () => {
+    let amount = 0;
+    cart.map((item) => {
+      amount += item.item.price * item.quantity;
+    });
+    return amount;
+  };
+
+  const getQuantities = () => {
+    let len = 0;
+    cart.map((item) => {
+      len += item.quantity;
+    });
+    return len;
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, removeItem, addItem, isInCart, clear }}
+      value={{
+        cart,
+        removeItem,
+        addItem,
+        isInCart,
+        clear,
+        getCartAmount,
+        getQuantities,
+      }}
     >
       {/* componentes hijos  */}
       {children}

@@ -13,7 +13,7 @@ const mockData = [
         title: "Product-2",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, esse quaerat molestias rem optio deserunt ab, reprehenderit quod in incidunt laudantium. Praesentium vel aspernatur suscipit enim et porro dolor deleniti.",
         price: "15",
-        stock: 1,
+        stock: 11,
         pictureUrl: "no-image.png",
         category: "categoria-1"
     },
@@ -22,7 +22,7 @@ const mockData = [
         title: "Product-3",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, esse quaerat molestias rem optio deserunt ab, reprehenderit quod in incidunt laudantium. Praesentium vel aspernatur suscipit enim et porro dolor deleniti.",
         price: "3",
-        stock: 2,
+        stock: 22,
         pictureUrl: "no-image.png",
         category: "categoria-1"
     },
@@ -31,7 +31,7 @@ const mockData = [
         title: "Product-4",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, esse quaerat molestias rem optio deserunt ab, reprehenderit quod in incidunt laudantium. Praesentium vel aspernatur suscipit enim et porro dolor deleniti.",
         price: "7",
-        stock: 3,
+        stock: 31,
         pictureUrl: "no-image.png",
         category: "categoria-2"
     },
@@ -40,7 +40,7 @@ const mockData = [
         title: "Product-5",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, esse quaerat molestias rem optio deserunt ab, reprehenderit quod in incidunt laudantium. Praesentium vel aspernatur suscipit enim et porro dolor deleniti.",
         price: "44",
-        stock: 1,
+        stock: 15,
         pictureUrl: "no-image.png",
         category: "categoria-2"
     },

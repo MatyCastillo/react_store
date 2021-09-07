@@ -9,6 +9,7 @@ import CartWidget from "./components/CartWidget";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Category from "./pages/Category";
+import Cart from "./components/Cart";
 
 import { useState } from "react";
 import CartContextProvider from "./context/cartContext";
@@ -31,6 +32,7 @@ export default function App() {
             <Detail />
           </Route>
           <Route exact path="/category/:categoryId" component={Category} />
+          <Route exact path="/cart" component={Cart} />
         </Switch>
       </BrowserRouter>
     </CartContextProvider>
