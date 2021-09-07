@@ -37,6 +37,7 @@ const CartContextProvider = ({ children }) => {
     setCart([]);
   };
 
+
   const getCartAmount = () => {
     let amount = 0;
     cart.map((item) => {
@@ -64,6 +65,7 @@ const CartContextProvider = ({ children }) => {
         getCartAmount,
         getQuantities,
       }}
+
     >
       {/* componentes hijos  */}
       {children}

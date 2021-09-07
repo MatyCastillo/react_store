@@ -1,5 +1,7 @@
 import React from "react";
+
 import { useState, useEffect, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import {
   makeStyles,
@@ -112,6 +114,7 @@ export default function ItemDetail(props) {
               </Typography>
               <Divider />
 
+
               {!finish && (
                 <ItemCount
                   mt={3}
@@ -132,6 +135,7 @@ export default function ItemDetail(props) {
                 </Button>
               )}
             </Box>
+
           </div>
         </Grid>
       </Grid>
