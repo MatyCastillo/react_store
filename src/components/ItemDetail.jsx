@@ -13,7 +13,7 @@ import {
   CardMedia,
   Divider,
 } from "@material-ui/core";
-import { CartContext } from "../context/cartContext";
+import { CartContext } from "../context/CartContext";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -114,7 +114,6 @@ export default function ItemDetail(props) {
               </Typography>
               <Divider />
 
-
               {!finish && (
                 <ItemCount
                   mt={3}
@@ -135,7 +134,6 @@ export default function ItemDetail(props) {
                 </Button>
               )}
             </Box>
-
           </div>
         </Grid>
       </Grid>

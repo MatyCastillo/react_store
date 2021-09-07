@@ -20,7 +20,7 @@ const CartContextProvider = ({ children }) => {
   const isInCart = (id) => {
     return (
       cart.filter(function (item) {
-        return item.item.id == id;
+        return item.item.id === id;
       }).length > 0
     );
   };
@@ -28,7 +28,7 @@ const CartContextProvider = ({ children }) => {
   const removeItem = (id) => {
     setCart(
       cart.filter(function (obj) {
-        return obj.item.id != id;
+        return obj.item.id !== id;
       })
     );
   };
@@ -36,7 +36,6 @@ const CartContextProvider = ({ children }) => {
   const clear = () => {
     setCart([]);
   };
-
 
   const getCartAmount = () => {
     let amount = 0;
@@ -65,7 +64,6 @@ const CartContextProvider = ({ children }) => {
         getCartAmount,
         getQuantities,
       }}
-
     >
       {/* componentes hijos  */}
       {children}

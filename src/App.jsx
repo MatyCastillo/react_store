@@ -12,7 +12,7 @@ import Category from "./pages/Category";
 import Cart from "./components/Cart";
 
 import { useState } from "react";
-import CartContextProvider from "./context/cartContext";
+import CartContextProvider from "./context/CartContext";
 
 export default function App() {
   return (
