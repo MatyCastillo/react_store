@@ -1,9 +1,9 @@
 import { useParams, useLocation } from "react-router";
 import { Grid, Box, Typography } from "@material-ui/core";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { getData } from "../firebase/index";
 import Item from "./Item";
-import LoadingCircle from "./LoadingLinear";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { mockData } from "../MockData";
 
 const { useEffect, useState } = require("react");
 
@@ -14,30 +14,37 @@ export default function ItemList() {
   const location = useLocation();
 
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      setLoading(true);
+    const getProducts = async () => {
+      const productsCollection = collection(getData(), "productos");
       if (categoryId == null) {
-        setTimeout(() => resolve(mockData), 2000);
+        const productsSnapshot = await getDocs(productsCollection);
+        const productsList = productsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productsList);
       } else {
-        setTimeout(
-          () =>
-            resolve(mockData.filter((item) => item.category === categoryId)),
-          2000
+        const productsQuery = query(
+          productsCollection,
+          where("category", "==", categoryId)
         );
+        const productsSnapshot = await getDocs(productsQuery);
+        const productsList = productsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productsList);
       }
-    })
-      .then((dataResolve) => {
-        setProducts(dataResolve);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("err", error);
-      });
+      setLoading(false);
+    };
+    getProducts();
+    setLoading(true);
   }, [location.pathname]);
+
   if (loading) {
     return (
       <Grid container spacing={3}>
-        {new Array(12).fill(1).map((item) => (
+        {new Array(6).fill(1).map((item) => (
           <Grid item xs={12} sm={6} md={3} lg={2}>
             <Box boxShadow={3} item xs={12} sm={6} md={2}>
               <Skeleton animation="wave" variant="rect" height={215} />
