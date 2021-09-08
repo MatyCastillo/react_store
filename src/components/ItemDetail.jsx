@@ -54,7 +54,6 @@ const useStyles = makeStyles({
 export default function ItemDetail(props) {
   const classes = useStyles();
   const item = props.item;
-  const finalPictureUrl = "/resources/img/" + item.pictureUrl;
   const { cart, addItem } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
   const [finish, setFinish] = useState(false);
@@ -75,7 +74,7 @@ export default function ItemDetail(props) {
         <Grid item lg={8} md={8} xs={12}>
           <CardMedia
             className={classes.media}
-            image={finalPictureUrl}
+            image={item.pictureUrl}
             title="Imagen del producto"
           />
         </Grid>

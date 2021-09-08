@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    backgroundColor: "#00695f", //navbar color
+    backgroundColor: "#303443", //navbar color
   },
   logo: {
     width: 135,
-    height: 43.54,
+    height: 33.54,
   },
 }));
 

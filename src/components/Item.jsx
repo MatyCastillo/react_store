@@ -63,7 +63,6 @@ function onAdd(qty) {
 
 export default function Item({ id, title, description, pictureUrl, price }) {
   const classes = useStyles();
-  const finalPictureUrl = "/resources/img/" + pictureUrl;
 
   return (
     <Grid item xs={12} sm={6} lg={2}>
@@ -75,12 +74,12 @@ export default function Item({ id, title, description, pictureUrl, price }) {
               component="img"
               alt="No Image"
               height="140"
-              image={finalPictureUrl}
+              image={pictureUrl}
               title="No Image"
             />
             <CardContent>
               <div className={classes.cardContent}>
-                <Typography gutterBottom variant="h6">
+                <Typography gutterBottom>
                   {title}
                   <Typography className={classes.idText}>id:{id}</Typography>
                 </Typography>
@@ -88,7 +87,7 @@ export default function Item({ id, title, description, pictureUrl, price }) {
               <Box
                 component="div"
                 className={classes.descriptionBox}
-                sx={{ typography: "body2" }}
+                sx={{ typography: "body1" }}
               >
                 {description}
               </Box>

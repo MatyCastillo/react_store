@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { getData } from "../firebase/index";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {
   Container,
@@ -11,8 +13,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import ItemDetail from "./ItemDetail";
-import LoadingCircle from "./LoadingLinear";
-import { mockData } from "../MockData";
 
 const { useEffect, useState } = require("react");
 
@@ -60,19 +60,23 @@ export default function ItemDetailContainer() {
   const { id } = useParams();
 
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      setLoading(true);
-      setTimeout(
-        () => resolve(mockData.filter((item) => item.id === id)),
-        2000
+    const getItem = async () => {
+      const productsCollection = collection(getData(), "productos");
+      const itemQuery = query(
+        productsCollection,
+        where("id", "==", parseInt(id))
       );
-    })
-      .then((dataResolve) => {
-        setItem(dataResolve[0]);
-        setLoading(false);
-      })
-      .catch((error) => {});
+      const querySnapshot = await getDocs(itemQuery);
+      querySnapshot.forEach((doc) => {
+        setItem(doc.data());
+      });
+
+      setLoading(false);
+    };
+    getItem();
+    setLoading(true);
   }, []);
+
   if (loading) {
     return (
       <Container className={classes.containerBg}>
