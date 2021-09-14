@@ -1,4 +1,4 @@
-import { React, useContext, useState } from "react";
+import { React, useContext, useState, useEffect } from "react";
 import {
   makeStyles,
   Box,
@@ -12,6 +12,9 @@ import {
 } from "@material-ui/core";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import BuyerForm from "./BuyerForm";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { getData } from "../firebase/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,14 +50,45 @@ const useStyles = makeStyles((theme) => ({
 const Cart = () => {
   const classes = useStyles();
   const { cart, removeItem, clear, getCartAmount } = useContext(CartContext);
+  const [openBuyerModal, setOpenBuyerModal] = useState(false);
+  const [creatingOrder, setCreatingOrder] = useState(false);
+  const [finisBuyButton, setFinisBuyButton] = useState(false);
+  const handleClickOpen = () => {
+    setOpenBuyerModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenBuyerModal(false);
+  };
 
   const remove = (id) => {
     removeItem(id);
   };
+
+  const onBuyFinish = async (buyerData) => {
+    setCreatingOrder(true);
+
+    delete buyerData.repeatEmail;
+    const order = {
+      buyer: buyerData,
+      items: cart,
+      date: Timestamp.fromDate(new Date()),
+      total: getCartAmount(),
+    };
+
+    const docRef = await addDoc(collection(getData(), "orders"), order);
+    console.log("Document written with ID: ", docRef.id);
+  };
+
   function itemCartCard(item) {
     return (
       <>
         <Grid container spacing={3} className={classes.root}>
+          <BuyerForm
+            open={openBuyerModal}
+            close={handleClose}
+            finish={onBuyFinish}
+          />
           <Grid item className={classes.img}>
             <Avatar
               alt="Remy Sharp"
@@ -177,6 +211,8 @@ const Cart = () => {
                     style={{ marginTop: "8px" }}
                     fullWidth
                     variant="outlined"
+                    onClick={() => handleClickOpen()}
+                    disabled={cart.length === 0}
                   >
                     Terminar Compra
                   </Button>

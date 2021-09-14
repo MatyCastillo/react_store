@@ -15,13 +15,9 @@ export default function CartWidget() {
         aria-label="ver contenido del carrito"
         color="inherit"
       >
-        {getQuantities() !== 0 ? (
-          <Badge badgeContent={getQuantities()} color="secondary">
-            <ShoppingCartIcon />
-          </Badge>
-        ) : (
-          <></>
-        )}
+        <Badge badgeContent={getQuantities()} color="secondary">
+          <ShoppingCartIcon />
+        </Badge>
       </IconButton>
     </>
   );
