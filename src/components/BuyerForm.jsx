@@ -13,6 +13,14 @@ import {
 
 function BuyerForm(prop) {
   const [orderInProgress, serOrderInProgress] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [nameHelper, setNameHelper] = useState("");
+  const [phoneError, setPhoneError] = useState(false);
+  const [phoneHelper, setPhoneHelper] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [emailHelper, setEmailHelper] = useState("");
+  const [repeatEmailError, setRepeatEmailError] = useState(false);
+  const [repeatEmailHelper, setRepeatEmailHelper] = useState("");
   const [invalidDialog, setInvalidDialog] = useState({
     open: false,
     message: "",
@@ -32,20 +40,22 @@ function BuyerForm(prop) {
 
   const validateForm = () => {
     if (buyerData.name == "") {
-      setInvalidDialog({
-        open: true,
-        message: "Completá el nombre del comprador",
-      });
+      setNameError(true);
+      setNameHelper("Ingrese nombre");
       document.getElementsByName("name")[0].focus();
       return;
+    } else {
+      setNameError(false);
+      setNameHelper("");
     }
     if (buyerData.phone == "") {
-      setInvalidDialog({
-        open: true,
-        message: "Completá el teléfono del comprador",
-      });
+      setPhoneError(true);
+      setPhoneHelper("Ingrese un numero de telefono");
       document.getElementsByName("phone")[0].focus();
       return;
+    } else {
+      setPhoneError(false);
+      setPhoneHelper("");
     }
     if (
       buyerData.email != buyerData.repeatEmail ||
@@ -53,16 +63,13 @@ function BuyerForm(prop) {
       !buyerData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
     ) {
       buyerData.email != buyerData.repeatEmail
-        ? setInvalidDialog({
-            open: true,
-            message: "Repetí el mismo email en ambos campos",
-          })
-        : setInvalidDialog({
-            open: true,
-            message: "El email que ingresaste no válido",
-          });
+        ? setRepeatEmailHelper("El mail no coincide")
+        : setEmailHelper("El mail no es correcto");
       document.getElementsByName("email")[0].focus();
       return;
+    } else {
+      setEmailHelper("");
+      setEmailError(false);
     }
 
     prop.finish(buyerData);
@@ -93,6 +100,8 @@ function BuyerForm(prop) {
             fullWidth
             onChange={handleInputChange}
             disabled={orderInProgress}
+            error={nameError}
+            helperText={nameHelper}
           />
           <TextField
             margin="dense"
@@ -103,6 +112,8 @@ function BuyerForm(prop) {
             fullWidth
             onChange={handleInputChange}
             disabled={orderInProgress}
+            error={phoneError}
+            helperText={phoneHelper}
           />
           <TextField
             margin="dense"
@@ -113,6 +124,8 @@ function BuyerForm(prop) {
             fullWidth
             onChange={handleInputChange}
             disabled={orderInProgress}
+            error={emailError}
+            helperText={emailHelper}
           />
           <TextField
             margin="dense"
@@ -123,13 +136,15 @@ function BuyerForm(prop) {
             fullWidth
             onChange={handleInputChange}
             disabled={orderInProgress}
+            error={repeatEmailError}
+            helperText={repeatEmailHelper}
           />
         </DialogContent>
         <DialogActions>
           <Button
             onClick={() => prop.close()}
             variant="outlined"
-            disabled={orderInProgress}
+            disabled={prop.loadingOrder}
           >
             Cancel
           </Button>
@@ -138,12 +153,12 @@ function BuyerForm(prop) {
             color="primary"
             variant="outlined"
             onClick={() => validateForm()}
-            disabled={orderInProgress}
+            disabled={prop.loadingOrder}
           >
             Finalizar pedido
           </Button>
         </DialogActions>
-        {<LinearProgress />}
+        {prop.loadingOrder ? <LinearProgress /> : <></>}
       </Dialog>
     </div>
   );
