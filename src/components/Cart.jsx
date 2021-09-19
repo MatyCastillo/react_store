@@ -9,6 +9,11 @@ import {
   Divider,
   Avatar,
   Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@material-ui/core";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
@@ -47,12 +52,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Cart = () => {
+function Cart() {
   const classes = useStyles();
   const { cart, removeItem, clear, getCartAmount } = useContext(CartContext);
   const [openBuyerModal, setOpenBuyerModal] = useState(false);
-  const [creatingOrder, setCreatingOrder] = useState(false);
-  const [finisBuyButton, setFinisBuyButton] = useState(false);
+  const [openOrderIdModal, setOpenOrderIdModal] = useState(false);
+  const [loadingOrder, setLoadingOrder] = useState(false);
+  const [orderState, setOrderState] = useState({
+    finish: false,
+    orderId: "",
+  });
   const handleClickOpen = () => {
     setOpenBuyerModal(true);
   };
@@ -65,8 +74,14 @@ const Cart = () => {
     removeItem(id);
   };
 
+  const handleOrderIdModalClose = () => {
+    setOpenOrderIdModal(false);
+    clear();
+    handleClose();
+  };
+
   const onBuyFinish = async (buyerData) => {
-    setCreatingOrder(true);
+    setLoadingOrder(true);
 
     delete buyerData.repeatEmail;
     const order = {
@@ -77,18 +92,16 @@ const Cart = () => {
     };
 
     const docRef = await addDoc(collection(getData(), "orders"), order);
+    //const orderId = docRef.id;
     console.log("Document written with ID: ", docRef.id);
+    setOrderState({ finish: true, orderId: docRef.id });
+    setOpenOrderIdModal(true);
   };
 
   function itemCartCard(item) {
     return (
       <>
         <Grid container spacing={3} className={classes.root}>
-          <BuyerForm
-            open={openBuyerModal}
-            close={handleClose}
-            finish={onBuyFinish}
-          />
           <Grid item className={classes.img}>
             <Avatar
               alt="Remy Sharp"
@@ -137,6 +150,7 @@ const Cart = () => {
       </>
     );
   }
+
   return (
     <Container>
       <Box my={3}>
@@ -222,8 +236,33 @@ const Cart = () => {
           </Grid>
         </Grid>
       </Box>
+      <BuyerForm
+        open={openBuyerModal}
+        close={handleClose}
+        finish={onBuyFinish}
+        loadingOrder={loadingOrder}
+        orderState={orderState}
+      />
+      <Dialog onClose={handleOrderIdModalClose} open={openOrderIdModal}>
+        <DialogTitle id="simple-dialog-title">
+          Órden <b style={{ color: "red" }}>{orderState.orderId}</b> generada
+          con éxito.
+          <br />
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Podrá visualizarla en "Buscar órden por ID"
+            <br />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleOrderIdModalClose} color="primary" autoFocus>
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
-};
+}
 
 export default Cart;
