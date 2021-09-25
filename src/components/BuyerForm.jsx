@@ -7,7 +7,6 @@ import {
   DialogContentText,
   TextField,
   DialogActions,
-  makeStyles,
   LinearProgress,
 } from "@material-ui/core";
 
@@ -21,10 +20,6 @@ function BuyerForm(prop) {
   const [emailHelper, setEmailHelper] = useState("");
   const [repeatEmailError, setRepeatEmailError] = useState(false);
   const [repeatEmailHelper, setRepeatEmailHelper] = useState("");
-  const [invalidDialog, setInvalidDialog] = useState({
-    open: false,
-    message: "",
-  });
   const [buyerData, setBuyerData] = useState({
     name: "",
     phone: "",

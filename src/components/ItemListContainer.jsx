@@ -16,10 +16,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ItemListContainer = (prop) => {
-  function onAdd(qty) {
-    alert("onAdd " + qty);
-  }
-
   const classes = useStyles();
   return (
     <div>

@@ -13,14 +13,13 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    // maxWidth: 345, original width style
     maxWidth: "100%",
     transition: "transform 0.15s ease-in-out",
     "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
   },
   media: {
     height: "100%",
-    paddingTop: "0", // 16:9
+    paddingTop: "0",
   },
   cardContent: {
     display: "flex",
@@ -55,33 +54,35 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
   },
+  stock: {
+    fontSize: 12,
+    display: "flex",
+  },
 });
 
-function onAdd(qty) {
-  alert("onAdd " + qty);
-}
-
-export default function Item({ id, title, description, pictureUrl, price }) {
+export default function Item(props) {
   const classes = useStyles();
 
   return (
     <Grid item xs={12} sm={6} lg={2}>
       <Box boxShadow={3} item xs={12} sm={6} md={2}>
         <Card className={classes.root}>
-          <CardActionArea to={`/item/${id}`} component={Link}>
+          <CardActionArea to={`/item/${props.id}`} component={Link}>
             <CardMedia
               className={classes.media}
               component="img"
               alt="No Image"
               height="140"
-              image={pictureUrl}
+              image={props.pictureUrl}
               title="No Image"
             />
             <CardContent>
               <div className={classes.cardContent}>
                 <Typography gutterBottom>
-                  {title}
-                  <Typography className={classes.idText}>id:{id}</Typography>
+                  {props.title}
+                  <Typography className={classes.idText}>
+                    id:{props.id}
+                  </Typography>
                 </Typography>
               </div>
               <Box
@@ -89,10 +90,21 @@ export default function Item({ id, title, description, pictureUrl, price }) {
                 className={classes.descriptionBox}
                 sx={{ typography: "body1" }}
               >
-                {description}
+                {props.description}
               </Box>
               <Typography className={classes.price} variant="h5">
-                $ {Number(price).toLocaleString("es-AR")}
+                $ {Number(props.price).toLocaleString("es-AR")}
+              </Typography>
+              <Typography className={classes.stock}>
+                Unidades Disponibles:
+                <Typography
+                  className={classes.stock}
+                  style={
+                    props.stock > 0 ? { color: "green" } : { color: "red" }
+                  }
+                >
+                  {props.stock > 0 ? props.stock : "Sin Stock"}
+                </Typography>
               </Typography>
             </CardContent>
           </CardActionArea>

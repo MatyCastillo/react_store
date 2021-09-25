@@ -5,13 +5,13 @@ import "@fontsource/roboto";
 import NavBar from "./components/NavBar";
 import MenuButtons from "./components/Menu";
 import CartWidget from "./components/CartWidget";
+import Breadcrumb from "./components/Breadcrumb";
 //pages
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Category from "./pages/Category";
 import Cart from "./components/Cart";
-
-import { useState } from "react";
+//contexts
 import CartContextProvider from "./context/CartContext";
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
             <CartWidget />
           </MenuButtons>
         </NavBar>
-
+        <Breadcrumb />
         <Switch>
           <Route exact path="/">
             <Home />

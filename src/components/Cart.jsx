@@ -92,8 +92,6 @@ function Cart() {
     };
 
     const docRef = await addDoc(collection(getData(), "orders"), order);
-    //const orderId = docRef.id;
-    console.log("Document written with ID: ", docRef.id);
     setOrderState({ finish: true, orderId: docRef.id });
     setOpenOrderIdModal(true);
   };
