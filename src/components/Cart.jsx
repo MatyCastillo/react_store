@@ -115,7 +115,7 @@ function Cart() {
                   <Typography variant="h6" style={{ display: "inline-block" }}>
                     {item.item.title}
                     <Typography style={{ display: "inline-block" }}>
-                      - X {item.quantity}
+                      - Cantidad: {item.quantity}
                     </Typography>
                   </Typography>
                 </Grid>

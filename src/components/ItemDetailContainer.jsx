@@ -66,7 +66,9 @@ export default function ItemDetailContainer() {
         productsCollection,
         where("id", "==", parseInt(id))
       );
-      const querySnapshot = await getDocs(itemQuery);
+      const querySnapshot = await getDocs(itemQuery).catch(() =>
+        console.log("error")
+      );
       querySnapshot.forEach((doc) => {
         setItem(doc.data());
       });

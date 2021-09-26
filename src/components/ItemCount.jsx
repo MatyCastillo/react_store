@@ -47,7 +47,7 @@ export default function ItemCount(props) {
 
   return (
     <CardContent>
-      <ButtonGroup className={classes.buttons}>
+      <ButtonGroup disabled={props.stock <= 0} className={classes.buttons}>
         <Button
           aria-label="reduce"
           onClick={() => {
@@ -74,7 +74,7 @@ export default function ItemCount(props) {
         fullWidth
         variant="outlined"
         onClick={() => props.onAdd(count)}
-        disabled={props.stock < 0}
+        disabled={props.stock <= 0}
       >
         Agregar al Carrito
       </Button>
