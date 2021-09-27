@@ -41,6 +41,8 @@ const useStyles = makeStyles({
   },
   stock: {
     float: "right",
+    fontSize: 12,
+    display: "flex",
   },
   price: {
     color: "#B82704",
@@ -53,10 +55,6 @@ const useStyles = makeStyles({
   divConteiner: {
     justifyContent: "center",
     textAlign: "center",
-  },
-  stock: {
-    fontSize: 12,
-    display: "flex",
   },
 });
 

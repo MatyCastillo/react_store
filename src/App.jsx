@@ -13,6 +13,8 @@ import Category from "./pages/Category";
 import Cart from "./components/Cart";
 //contexts
 import CartContextProvider from "./context/CartContext";
+import OrderSearch from "./components/OrderSearch";
+import OrderContainer from "./components/OrderContainer";
 
 export default function App() {
   return (
@@ -25,13 +27,11 @@ export default function App() {
         </NavBar>
         <Breadcrumb />
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/item/:id">
-            <Detail />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/item/:id" component={Detail} />
           <Route exact path="/category/:categoryId" component={Category} />
+          <Route exact path="/order" component={OrderSearch} />
+          <Route exact path="/order/:orderId" component={OrderContainer} />
           <Route exact path="/cart" component={Cart} />
         </Switch>
       </BrowserRouter>

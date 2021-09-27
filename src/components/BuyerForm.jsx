@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 
 function BuyerForm(prop) {
-  const [orderInProgress, serOrderInProgress] = useState(false);
+  const [orderInProgress, setOrderInProgress] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [nameHelper, setNameHelper] = useState("");
   const [phoneError, setPhoneError] = useState(false);
@@ -34,7 +34,7 @@ function BuyerForm(prop) {
   };
 
   const validateForm = () => {
-    if (buyerData.name == "") {
+    if (buyerData.name === "") {
       setNameError(true);
       setNameHelper("Ingrese nombre");
       document.getElementsByName("name")[0].focus();
@@ -43,7 +43,7 @@ function BuyerForm(prop) {
       setNameError(false);
       setNameHelper("");
     }
-    if (buyerData.phone == "") {
+    if (buyerData.phone === "") {
       setPhoneError(true);
       setPhoneHelper("Ingrese un numero de telefono");
       document.getElementsByName("phone")[0].focus();
@@ -53,11 +53,11 @@ function BuyerForm(prop) {
       setPhoneHelper("");
     }
     if (
-      buyerData.email != buyerData.repeatEmail ||
-      buyerData.email == "" ||
+      buyerData.email !== buyerData.repeatEmail ||
+      buyerData.email === "" ||
       !buyerData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
     ) {
-      buyerData.email != buyerData.repeatEmail
+      buyerData.email !== buyerData.repeatEmail
         ? setRepeatEmailHelper("El mail no coincide")
         : setEmailHelper("El mail no es correcto");
       document.getElementsByName("email")[0].focus();

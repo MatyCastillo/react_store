@@ -6,7 +6,6 @@ import {
   Paper,
   makeStyles,
   Grid,
-  B,
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
@@ -26,8 +25,8 @@ const Breadcrumb = (props) => {
 
   const pathnames = pathname
     .split("/")
-    .filter((x) => x != "item" && x != "category");
-  const pathFinal = pathnames.filter((x) => x != "");
+    .filter((x) => x !== "item" && x !== "category");
+  const pathFinal = pathnames.filter((x) => x !== "");
 
   return (
     <Paper spacing={3} variant="outlined">
