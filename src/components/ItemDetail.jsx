@@ -1,7 +1,5 @@
 import React from "react";
-
 import { useState, useEffect, useContext } from "react";
-
 import { Link } from "react-router-dom";
 import {
   makeStyles,
@@ -24,7 +22,7 @@ const useStyles = makeStyles({
   },
   media: {
     height: "0",
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "56.25%",
   },
   content: {
     display: "flex",
@@ -49,12 +47,16 @@ const useStyles = makeStyles({
     fontWeight: "500",
     color: "rgba(0,0,0,.3)",
   },
+  stock: {
+    fontSize: 12,
+    display: "flex",
+  },
 });
 
 export default function ItemDetail(props) {
   const classes = useStyles();
   const item = props.item;
-  const { cart, addItem } = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
   const [finish, setFinish] = useState(false);
 
@@ -112,7 +114,15 @@ export default function ItemDetail(props) {
                 {item.description}
               </Typography>
               <Divider />
-
+              <Typography className={classes.stock}>
+                Unidades Disponibles:
+                <Typography
+                  className={classes.stock}
+                  style={item.stock > 0 ? { color: "green" } : { color: "red" }}
+                >
+                  {item.stock > 0 ? item.stock : "Sin Stock"}
+                </Typography>
+              </Typography>
               {!finish && (
                 <ItemCount
                   mt={3}

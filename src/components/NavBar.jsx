@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    backgroundColor: "#303443", //navbar color
+    backgroundColor: "#303443",
   },
   logo: {
     width: 135,
@@ -31,7 +31,6 @@ export default function NavBar(props) {
     <div className={classes.grow}>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
-          {/* <img src="../resources/img/react.svg" alt="logo" className={classes.logo} to={'/'} component={Link}/>  */}
           <Toolbar
             to={"/"}
             component={Link}

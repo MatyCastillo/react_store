@@ -1,4 +1,6 @@
 import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { getData } from "../firebase/index";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
@@ -9,7 +11,7 @@ import {
 } from "@material-ui/core";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MoreIcon from "@material-ui/icons/MoreVert";
-
+const { useEffect, useState } = require("react");
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -30,9 +32,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Categories(prop) {
   const classes = useStyles();
+  const [categories, setCategories] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const categoriesCollection = collection(getData(), "categories");
+      const categoriesSnapshot = await getDocs(categoriesCollection);
+      const categoriesList = categoriesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setCategories(categoriesList);
+    };
+    getCategories();
+  }, []);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -64,20 +79,15 @@ export default function Categories(prop) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem
-        to={`/category/${"categoria-1"}`}
-        component={Link}
-        onClick={handleMenuClose}
-      >
-        Categoría-1
-      </MenuItem>
-      <MenuItem
-        to={`/category/${"categoria-2"}`}
-        component={Link}
-        onClick={handleMenuClose}
-      >
-        Categoría-2
-      </MenuItem>
+      {categories.map((category) => (
+        <MenuItem
+          to={`/category/${category.name}`}
+          component={Link}
+          onClick={handleMenuClose}
+        >
+          {category.name.toUpperCase()}
+        </MenuItem>
+      ))}
     </Menu>
   );
 
@@ -110,6 +120,9 @@ export default function Categories(prop) {
     <>
       <div className={classes.grow} />
       <div className={classes.sectionDesktop}>
+        <Button color="inherit" component={Link} to={`/order`}>
+          Buscar Órden
+        </Button>
         <Button
           edge="end"
           aria-label="categorías de la tienda"

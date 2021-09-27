@@ -28,10 +28,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ItemCount({ stock, initial, onAdd }) {
-  const stockNum = parseInt(stock);
+export default function ItemCount(props) {
+  const stockNum = parseInt(props.stock);
   const classes = useStyles();
-  const [count, setCount] = useState(initial);
+  const [count, setCount] = useState(props.initial);
 
   const addOne = () => {
     if (count < stockNum) {
@@ -47,7 +47,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
 
   return (
     <CardContent>
-      <ButtonGroup className={classes.buttons}>
+      <ButtonGroup disabled={props.stock <= 0} className={classes.buttons}>
         <Button
           aria-label="reduce"
           onClick={() => {
@@ -73,7 +73,8 @@ export default function ItemCount({ stock, initial, onAdd }) {
         style={{ marginTop: "8px" }}
         fullWidth
         variant="outlined"
-        onClick={() => onAdd(count)}
+        onClick={() => props.onAdd(count)}
+        disabled={props.stock <= 0}
       >
         Agregar al Carrito
       </Button>

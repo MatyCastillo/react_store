@@ -1,4 +1,4 @@
-import { React, useContext, useState, useEffect } from "react";
+import { React, useContext, useState } from "react";
 import {
   makeStyles,
   Box,
@@ -7,7 +7,6 @@ import {
   Typography,
   Grid,
   Divider,
-  Avatar,
   Container,
   Dialog,
   DialogTitle,
@@ -20,6 +19,7 @@ import { Link } from "react-router-dom";
 import BuyerForm from "./BuyerForm";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { getData } from "../firebase/index";
+import ItemCart from "./ItemCart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,64 +92,9 @@ function Cart() {
     };
 
     const docRef = await addDoc(collection(getData(), "orders"), order);
-    //const orderId = docRef.id;
-    console.log("Document written with ID: ", docRef.id);
     setOrderState({ finish: true, orderId: docRef.id });
     setOpenOrderIdModal(true);
   };
-
-  function itemCartCard(item) {
-    return (
-      <>
-        <Grid container spacing={3} className={classes.root}>
-          <Grid item className={classes.img}>
-            <Avatar
-              alt="Remy Sharp"
-              variant="rounded"
-              src="/resources/img/no-image.png"
-              className={classes.large}
-            />
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Grid container justify="space-between">
-                  <Typography variant="h6" style={{ display: "inline-block" }}>
-                    {item.item.title}
-                    <Typography style={{ display: "inline-block" }}>
-                      - X {item.quantity}
-                    </Typography>
-                  </Typography>
-                </Grid>
-                <Typography variant="body2" gutterBottom>
-                  Categoria: {item.item.category}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  ID: {item.item.id}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Button
-                  onClick={() => {
-                    remove(item.item.id);
-                  }}
-                  variant="outlined"
-                >
-                  Eliminar
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Typography variant="subtitle1" className={classes.price}>
-                $ {Number(item.item.price).toLocaleString("es-AR")}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Divider />
-      </>
-    );
-  }
 
   return (
     <Container>
@@ -157,33 +102,70 @@ function Cart() {
         <Grid container spacing={2}>
           <Grid item lg={9} md={8} sm={9}>
             <Paper variant="outlined">
-              {cart.length === 0 ? (
-                <Grid container spacing={3} className={classes.root}>
-                  <Typography
-                    variant="h6"
-                    style={{
-                      margin: "auto",
-                      display: "block",
-                      padding: "30px",
-                    }}
-                  >
-                    No hay productos en el carrito
+              <Grid container spacing={3} className={classes.root}>
+                <Grid item>
+                  <Typography variant="h4" gutterBottom>
+                    Carrito
                   </Typography>
-                  <Button
-                    to={"/"}
-                    component={Link}
-                    style={{ margin: "8px" }}
-                    fullWidth
-                    variant="outlined"
-                  >
-                    Volver al catálogo
-                  </Button>
                 </Grid>
-              ) : (
-                <></>
-              )}
+              </Grid>
 
-              {cart.map((item) => itemCartCard(item))}
+              {cart.length === 0 ? (
+                <>
+                  <Divider />
+                  <Grid container spacing={3} className={classes.root}>
+                    <Typography
+                      variant="h6"
+                      style={{
+                        margin: "auto",
+                        display: "block",
+                        padding: "30px",
+                      }}
+                    >
+                      No hay productos en el carrito
+                    </Typography>
+                    <Button
+                      to={"/"}
+                      component={Link}
+                      style={{ margin: "8px" }}
+                      fullWidth
+                      variant="outlined"
+                    >
+                      Volver al catálogo
+                    </Button>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    container
+                    justify="space-between"
+                    style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                  >
+                    <Typography
+                      inline
+                      style={{ cursor: "pointer", color: "#007185" }}
+                      onClick={() => clear()}
+                    >
+                      Limpiar Carrito
+                    </Typography>
+                    <Typography inline align="right">
+                      Precio
+                    </Typography>
+                  </Grid>
+                  <Divider />
+                  {cart.map((item) => (
+                    <ItemCart
+                      title={item.item.title}
+                      category={item.item.category}
+                      id={item.item.id}
+                      quantity={item.quantity}
+                      price={item.item.price}
+                      remove={remove}
+                    />
+                  ))}
+                </>
+              )}
             </Paper>
           </Grid>
           <Grid item lg={3} md={4} sm={4}>
