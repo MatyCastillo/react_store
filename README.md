@@ -32,4 +32,4 @@ Se utiliza un único contexto para manejar el carrito de compra.
 
 ## Navegación
 
-![GIF](/react_store/entrega-final.gif "Navegación")
+![GIF](/entrega-final.gif "Navegación")
