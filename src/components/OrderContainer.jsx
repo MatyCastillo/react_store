@@ -50,6 +50,7 @@ function OrderContainer() {
   const [order, setOrder] = useState([]);
   const [loading, setLoading] = useState(true);
   const { orderId } = useParams();
+  const [item, setItem] = useState([]);
 
   useEffect(() => {
     (async () => {
